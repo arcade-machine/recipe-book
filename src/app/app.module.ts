@@ -4,13 +4,24 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
+import { MainHeaderComponent } from './header/header.component';
+import {RecipeBookComponent} from './recipe-book/recipe-book.component';
+import {RecipeBookModule} from './recipe-book/recipe-book.module';
+import { ShoppingListComponent } from './shopping-list/shopping-list.component';
+import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-edit.component';
+
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    MainHeaderComponent,
+    RecipeBookComponent,
+    ShoppingListComponent,
+    ShoppingEditComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    RecipeBookModule
   ],
   providers: [],
   bootstrap: [AppComponent]
