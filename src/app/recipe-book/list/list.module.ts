@@ -1,13 +1,15 @@
 import { NgModule } from '@angular/core';
-
-import { RecipeItemComponent } from './item/item.component';
+import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
+    imports: [
+      BrowserModule,
+      CommonModule
+    ],
     exports: [
-        RecipeItemComponent
     ],
     declarations: [
-        RecipeItemComponent
     ]
 })
 export class RecipeBookListModule { }
