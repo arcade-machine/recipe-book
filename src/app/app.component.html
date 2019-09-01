@@ -1,9 +1,9 @@
 <div class="container">
-    <app-header></app-header>
+    <app-header (selectedTab)="openTab($event)"></app-header>
     <div class="row">
         <div class="col-md-12">
-            <app-recipe-book></app-recipe-book>
-            <app-shopping-list></app-shopping-list>
+            <app-recipe-book *ngIf="currentTab === 'recipe'"></app-recipe-book>
+            <app-shopping-list *ngIf="currentTab === 'shoppingList'"></app-shopping-list>
         </div>
         <div class="col-md-12">
 

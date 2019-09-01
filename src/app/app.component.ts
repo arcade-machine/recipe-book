@@ -6,4 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  currentTab = 'recipe';
+
+  openTab(navigationTab: string) {
+    this.currentTab = navigationTab;
+  };
 }
