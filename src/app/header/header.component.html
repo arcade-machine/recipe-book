@@ -16,8 +16,8 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" role="button">Open <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
+                    <a href="#" class="dropdown-toggle" role="button" appDropdown [dropdownMenu]="HeaderMenu">Open <span class="caret"></span></a>
+                    <ul class="dropdown-menu" #HeaderMenu>
                         <li>
                             <a href="#">Save data</a>
                         </li>
