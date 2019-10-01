@@ -2,27 +2,27 @@
     <nav class="navbar navbar-default">
         <div class="">
             <div class="navbar-header">
-                <a href="#" class="navbar-brand">Recipe book</a>
+                <a [routerLink]="'/'" class="navbar-brand">Recipe book</a>
             </div>
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li>
-                    <a (click)="selectTab('recipe')">Recipes</a>
+                <li [routerLinkActive]="'active'">
+                    <a [routerLink]="'/recipes'">Recipes</a>
                 </li>
-                <li>
-                    <a (click)="selectTab('shoppingList')">Shopping list</a>
+                <li [routerLinkActive]="'active'">
+                    <a [routerLink]="'/shopping-list'">Shopping list</a>
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" role="button" appDropdown [dropdownMenu]="HeaderMenu">Open <span class="caret"></span></a>
+                    <a class="dropdown-toggle" role="button" appDropdown [dropdownMenu]="HeaderMenu">Open <span class="caret"></span></a>
                     <ul class="dropdown-menu" #HeaderMenu>
                         <li>
-                            <a href="#">Save data</a>
+                            <a>Save data</a>
                         </li>
                         <li>
-                            <a href="#">Save data</a>
+                            <a>Fetch data</a>
                         </li>
                     </ul>
                 </li>
