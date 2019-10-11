@@ -12,8 +12,10 @@ export class RecipeService {
     private recipesList: Recipe[] = [
         new Recipe(
           'Keto Spinach-Artichoke Chicken',
-          'Spinach artichoke dip meets baked chicken! These juicy chicken breasts are smothered with a cheesy spinach and artichoke topping.' +
-          'It\'s the ultimate comfort food for those following a keto or low-carb lifestyle, and will be loved by everyone in the family regardless of diet!' +
+          'Spinach artichoke dip meets baked chicken! These juicy chicken ' +
+          'breasts are smothered with a cheesy spinach and artichoke topping.' +
+          'It\'s the ultimate comfort food for those following a keto or low-carb' +
+          ' lifestyle, and will be loved by everyone in the family regardless of diet!' +
           'Serve with a side of roasted broccoli or asparagus, or on top of cauliflower rice.',
           'https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fimages.media-allrecipes.com%2Fuserphotos%2F6711878.jpg',
           [
@@ -35,6 +37,10 @@ export class RecipeService {
 
     getRecipes() {
         return this.recipesList.slice();
+    }
+
+    getRecipe(id: number) {
+      return this.recipesList[id];
     }
 
     addIngredients(ingredients: Ingredient[]) {

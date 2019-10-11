@@ -3,17 +3,22 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 
+
 import { RecipeListComponent } from './list/list.component';
 import { RecipeItemComponent } from './list/item/item.component';
 import { EditComponent } from './edit/edit.component';
 
 import { DropdownDirective } from '../shared/dropdown.directive';
+import { RecipeStartComponent } from './recipe-start/recipe-start.component';
+import { RouterModule } from '@angular/router';
+import { RecipeEditComponent } from './recipe-edit/recipe-edit.component';
 
 @NgModule({
-    imports: [
-      BrowserModule,
-      CommonModule
-    ],
+  imports: [
+    BrowserModule,
+    CommonModule,
+    RouterModule
+  ],
   exports: [
     RecipeListComponent,
     RecipeItemComponent,
@@ -24,7 +29,9 @@ import { DropdownDirective } from '../shared/dropdown.directive';
         RecipeListComponent,
         RecipeItemComponent,
         DropdownDirective,
-        EditComponent
+        EditComponent,
+        RecipeStartComponent,
+        RecipeEditComponent
     ]
 })
 export class RecipeBookModule { }
