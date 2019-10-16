@@ -3,10 +3,14 @@ import { Injectable } from '@angular/core';
 import { Recipe } from './recipe-book.model';
 import { Ingredient } from '../shared/ingredient.module';
 import { ShoppingListService } from '../shopping-list/shopping-list.service';
+import { Subject } from 'rxjs';
 
 @Injectable()
 
 export class RecipeService {
+    recipeChanging = new Subject<Recipe[]>();
+    startedEditing = new Subject<number>();
+
     private recipesList: Recipe[] = [
         new Recipe(
           'Keto Spinach-Artichoke Chicken',
@@ -39,6 +43,15 @@ export class RecipeService {
 
     getRecipe(id: number) {
       return this.recipesList[id];
+    }
+
+    addRecipe(recipe: Recipe) {
+      this.recipesList.push(recipe);
+      this.recipeChanging.next(this.recipesList.slice());
+    }
+
+    editedRecipe(index: number) {
+      return this.recipesList[index];
     }
 
     addIngredients(ingredients: Ingredient[]) {

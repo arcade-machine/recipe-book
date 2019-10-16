@@ -1,5 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+
 import { ActivatedRoute, Params } from '@angular/router';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+
+import { Recipe } from '../recipe-book.model';
+import { RecipeService } from '../recipe.service';
+
 
 @Component({
   selector: 'app-recipe-edit',
@@ -9,8 +16,12 @@ import { ActivatedRoute, Params } from '@angular/router';
 export class RecipeEditComponent implements OnInit {
   id: number;
   editMode = false;
+  editRecipeForm: FormGroup;
+  onSubscribe: Subscription;
+  editedRecipe: Recipe;
 
-  constructor(private activeRoute: ActivatedRoute) { }
+  constructor(private activeRoute: ActivatedRoute,
+              private recipeService: RecipeService) {}
 
   ngOnInit() {
     this.activeRoute.params
@@ -18,8 +29,47 @@ export class RecipeEditComponent implements OnInit {
         (params: Params) => {
           this.id = +params['id'];
           this.editMode = params['id'] != null;
+          this.initForm();
+        }
+    );
+
+    this.onSubscribe = this.recipeService.startedEditing.subscribe(
+      (index: number) => {
+        if (this.editMode) {
+          this.editedRecipe = this.recipeService.editedRecipe(index);
+          this.editRecipeForm.controls.name.setValue(this.editedRecipe.name);
+        }
       }
     );
+
+  }
+
+  private initForm() {
+    let recipeName = '';
+    let imagePath = '';
+    let description = '';
+
+    if (this.editMode) {
+      const recipe = this.recipeService.getRecipe(this.id);
+      recipeName = recipe.name;
+      imagePath = recipe.imagePath;
+      description = recipe.description;
+    }
+
+    this.editRecipeForm = new FormGroup({
+      'name': new FormControl(recipeName, Validators.required),
+      'imgPath': new FormControl(imagePath, Validators.required),
+      'description': new FormControl(description, Validators.required),
+    });
+  }
+
+  onSubmit(form: FormGroup) {
+    const recipeName = form.value.name;
+    const recipeImgPath = form.value.imgPath;
+    const recipeDescription = form.value.description;
+    const newRecipe = new Recipe(recipeName, recipeDescription, recipeImgPath, []);
+    this.recipeService.addRecipe(newRecipe);
+    form.reset();
   }
 
 }
