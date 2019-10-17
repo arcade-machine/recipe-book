@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 
 import { Recipe } from './recipe-book.model';
 import { Ingredient } from '../shared/ingredient.module';
+
 import { ShoppingListService } from '../shopping-list/shopping-list.service';
-import { Subject } from 'rxjs';
 
 @Injectable()
 
@@ -52,6 +53,16 @@ export class RecipeService {
 
     editedRecipe(index: number) {
       return this.recipesList[index];
+    }
+
+    updateRecipe(index: number, newRecipe: Recipe) {
+      this.recipesList[index] = newRecipe;
+      this.recipeChanging.next(this.recipesList.slice());
+    }
+
+    deleteRecipe(index: number) {
+      this.recipesList.splice(index, 1);
+      this.recipeChanging.next(this.recipesList.slice());
     }
 
     addIngredients(ingredients: Ingredient[]) {

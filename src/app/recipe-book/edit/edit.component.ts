@@ -31,6 +31,11 @@ export class EditComponent implements OnInit {
     this.recipeService.addIngredients(this.recipe.ingredients);
   }
 
+  deleteRecipe() {
+    this.recipeService.deleteRecipe(this.id);
+    this.route.navigate(['../'], {relativeTo: this.activeRoute});
+  }
+
   onRecipeEdit() {
       // this.route.navigate(['edit'], {relativeTo: this.activeRoute});
       this.route.navigate(['../', this.id, 'edit'], {relativeTo: this.activeRoute});

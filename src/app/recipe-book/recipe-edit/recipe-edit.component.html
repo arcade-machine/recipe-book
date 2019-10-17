@@ -3,8 +3,8 @@
     <form (ngSubmit)="onSubmit(editRecipeForm)" [formGroup]="editRecipeForm">
       <div class="row">
         <div class="col-xs-12">
-          <button type="submit" class="btn btn-success" [disabled]="!editRecipeForm.valid">Save</button>
-          <button type="button" class="btn btn-danger">Cancel</button>
+          <button type="submit" class="btn btn-success" [disabled]="!editRecipeForm.valid">{{ editMode ? 'Update' : 'Save' }}</button>
+          <button type="button" class="btn btn-danger" (click)="clearForm(editRecipeForm)">Cancel</button>
         </div>
       </div>
       <div class="row">
@@ -23,13 +23,13 @@
             <label for="imagePath">
               Image URL
             </label>
-            <input type="text" id="imagePath" class="form-control" formControlName="imgPath">
+            <input type="text" id="imagePath" class="form-control" formControlName="imagePath">
           </div>
         </div>
       </div>
       <div class="row">
         <div class="col-xs-12">
-          <img src="{{ editRecipeForm.controls.imagePath }}" class="image-responsive">
+          <img src="{{ editRecipeForm.controls.imagePath.value }}" class="image-responsive">
         </div>
       </div>
       <div class="row">
@@ -52,7 +52,8 @@
             <input type="number" class="form-control" formControlName="amount">
           </div>
           <div class="col-xs-2">
-            <button type="button" class="btn btn-danger">X</button>
+            <button type="button" class="btn btn-danger"
+            (click)="deleteIngredient(i)">X</button>
           </div>
         </div>
         <hr>
