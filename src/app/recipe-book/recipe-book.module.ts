@@ -27,13 +27,13 @@ import { ReactiveFormsModule } from '@angular/forms';
     EditComponent,
     DropdownDirective
   ],
-    declarations: [
-        RecipeListComponent,
-        RecipeItemComponent,
-        DropdownDirective,
-        EditComponent,
-        RecipeStartComponent,
-        RecipeEditComponent
-    ]
+  declarations: [
+    RecipeListComponent,
+    RecipeItemComponent,
+    DropdownDirective,
+    EditComponent,
+    RecipeStartComponent,
+    RecipeEditComponent
+  ]
 })
 export class RecipeBookModule { }
