@@ -13,27 +13,27 @@ export class RecipeService {
     startedEditing = new Subject<number>();
 
     private recipesList: Recipe[] = [
-        new Recipe(
-          'Keto Spinach-Artichoke Chicken',
-          'Spinach artichoke dip meets baked chicken! These juicy chicken ' +
-          'breasts are smothered with a cheesy spinach and artichoke topping.' +
-          'It\'s the ultimate comfort food for those following a keto or low-carb' +
-          ' lifestyle, and will be loved by everyone in the family regardless of diet!' +
-          'Serve with a side of roasted broccoli or asparagus, or on top of cauliflower rice.',
-          'https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fimages.media-allrecipes.com%2Fuserphotos%2F6711878.jpg',
-          [
-            new Ingredient('Chicken', 1),
-            new Ingredient('Rice', 20)
-          ]),
-        new Recipe(
-          'Zucchini Boats on the Grill',
-          'Delish zucchini stuffed with your favorite ingredients and finished on the hot grill. ' +
-          'Great side dish or as a light meal on their own.',
-          'https://images.media-allrecipes.com/userphotos/720x405/5587737.jpg',
-          [
-            new Ingredient('Fish', 1),
-            new Ingredient('Macaroni', 20)
-          ])
+        // new Recipe(
+        //   'Keto Spinach-Artichoke Chicken',
+        //   'Spinach artichoke dip meets baked chicken! These juicy chicken ' +
+        //   'breasts are smothered with a cheesy spinach and artichoke topping.' +
+        //   'It\'s the ultimate comfort food for those following a keto or low-carb' +
+        //   ' lifestyle, and will be loved by everyone in the family regardless of diet!' +
+        //   'Serve with a side of roasted broccoli or asparagus, or on top of cauliflower rice.',
+        //   'https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fimages.media-allrecipes.com%2Fuserphotos%2F6711878.jpg',
+        //   [
+        //     new Ingredient('Chicken', 1),
+        //     new Ingredient('Rice', 20)
+        //   ]),
+        // new Recipe(
+        //   'Zucchini Boats on the Grill',
+        //   'Delish zucchini stuffed with your favorite ingredients and finished on the hot grill. ' +
+        //   'Great side dish or as a light meal on their own.',
+        //   'https://images.media-allrecipes.com/userphotos/720x405/5587737.jpg',
+        //   [
+        //     new Ingredient('Fish', 1),
+        //     new Ingredient('Macaroni', 20)
+        //   ])
     ];
 
     constructor(private shoppinglistService: ShoppingListService) {}
@@ -67,5 +67,10 @@ export class RecipeService {
 
     addIngredients(ingredients: Ingredient[]) {
       this.shoppinglistService.addIngredients(ingredients);
+    }
+
+    setRecipeList(recipes: Recipe[]) {
+        this.recipesList = recipes;
+        this.recipeChanging.next(this.recipesList.slice());
     }
 }

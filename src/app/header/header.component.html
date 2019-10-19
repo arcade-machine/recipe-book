@@ -16,13 +16,13 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
-                    <a class="dropdown-toggle" role="button" appDropdown [dropdownMenu]="HeaderMenu">Open <span class="caret"></span></a>
+                    <a class="dropdown-toggle" role="button" appDropdown [dropdownMenu]="HeaderMenu">Manage <span class="caret"></span></a>
                     <ul class="dropdown-menu" #HeaderMenu>
                         <li>
-                            <a>Save data</a>
+                            <a (click)="saveRecipes()">Save data</a>
                         </li>
                         <li>
-                            <a>Fetch data</a>
+                            <a (click)="getRecipes()">Fetch data</a>
                         </li>
                     </ul>
                 </li>
