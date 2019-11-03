@@ -19,7 +19,7 @@
                     <a [routerLink]="'/login'">Login</a>
                 </li>
                 <li *ngIf="isAuth">
-                    <a (click)="saveRecipes()">Logout</a>
+                    <a (click)="logout()">Logout</a>
                 </li>
                 <li class="dropdown" *ngIf="isAuth">
                     <a class="dropdown-toggle" role="button" appDropdown [dropdownMenu]="HeaderMenu">Manage <span class="caret"></span></a>

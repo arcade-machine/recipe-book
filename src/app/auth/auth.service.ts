@@ -5,6 +5,7 @@ import { catchError, tap } from 'rxjs/operators';
 import { BehaviorSubject, throwError } from 'rxjs';
 
 import { User } from './user.model';
+import { Router } from '@angular/router';
 
 export interface AuthResponseData {
     idToken: string;
@@ -26,7 +27,8 @@ export class AuthService {
     user = new BehaviorSubject<User>(null);
 
     constructor(
-        private http: HttpClient
+        private http: HttpClient,
+        private router: Router
     ) {}
 
     signUp(email: string, password: string) {
@@ -55,6 +57,29 @@ export class AuthService {
         );
     }
 
+    autoLogin() {
+        const userData: {
+            email: string,
+            id: string,
+            _token: string,
+            _tokenExpirationDate: string
+        } = JSON.parse(localStorage.getItem('user'));
+        if (!userData) {
+            return;
+        }
+
+        const loadedUser = new User(userData.email, userData.id, userData._token, new Date(userData._tokenExpirationDate));
+
+        if (loadedUser.token) {
+            this.user.next(loadedUser);
+        }
+    }
+
+    logOut() {
+        this.user.next(null);
+        this.router.navigate(['/login']);
+    }
+
     private handleAuth(email: string, id: string, token: string, expiresIn: number) {
         const expiresDate = new Date(new Date().getTime() + expiresIn * 1000);
         const user = new User(
@@ -64,6 +89,7 @@ export class AuthService {
             expiresDate
         );
         this.user.next(user);
+        localStorage.setItem('user', JSON.stringify(user));
     }
 
     private handleErrors(errorResponse: HttpErrorResponse) {

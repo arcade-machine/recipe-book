@@ -39,6 +39,10 @@ export class MainHeaderComponent implements OnInit, OnDestroy {
       );
     }
 
+    logout() {
+        this.authService.logOut();
+    }
+
     getRecipes() {
         this.requests.fetchRecipes();
     }
