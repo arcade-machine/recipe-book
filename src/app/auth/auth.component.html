@@ -1,6 +1,9 @@
 <div class="row">
     <div class="col-xs-12 col-md-6 col-lg-offset-3">
-        <form (ngSubmit)="onSubmit(authForm)" [formGroup]="authForm">
+        <div class="alert alert-danger" *ngIf="errorAccured">
+            <p>{{ error }}</p>
+        </div>
+        <form (ngSubmit)="onSubmit(authForm)" [formGroup]="authForm" *ngIf="!isLoading">
             <div class="form-group">
                 <label for="email"></label>
                 <input type="email" id="email" class="form-control" formControlName="email">
@@ -19,6 +22,8 @@
                 </button>
             </div>
         </form>
-        <app-loader></app-loader>
+        <div *ngIf="isLoading" style="text-align: center;">
+            <app-loader></app-loader>
+        </div>
     </div>
 </div>
