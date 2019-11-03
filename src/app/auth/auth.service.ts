@@ -25,6 +25,7 @@ export class AuthService {
     private SIGN_IN_URL = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBKM1n8WtmYbYNFxxj9eyN0uV4ZjF3YbV4';
 
     user = new BehaviorSubject<User>(null);
+    private _tokenTimer: any;
 
     constructor(
         private http: HttpClient,
@@ -72,12 +73,26 @@ export class AuthService {
 
         if (loadedUser.token) {
             this.user.next(loadedUser);
+            const expirationDuration = new Date(userData._tokenExpirationDate).getTime() - new Date().getTime();
+            this.autoLogout(expirationDuration);
         }
     }
 
     logOut() {
         this.user.next(null);
         this.router.navigate(['/login']);
+        localStorage.removeItem('user');
+
+        if (this._tokenTimer) {
+            clearTimeout(this._tokenTimer);
+        }
+        this._tokenTimer = null;
+    }
+
+    autoLogout(expirationDuration: number) {
+        this._tokenTimer = setTimeout(() => {
+            this.logOut();
+        }, expirationDuration);
     }
 
     private handleAuth(email: string, id: string, token: string, expiresIn: number) {
@@ -89,6 +104,7 @@ export class AuthService {
             expiresDate
         );
         this.user.next(user);
+        this.autoLogout(expiresIn * 1000);
         localStorage.setItem('user', JSON.stringify(user));
     }
 
