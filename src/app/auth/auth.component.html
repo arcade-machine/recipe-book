@@ -1,8 +1,9 @@
 <div class="row">
     <div class="col-xs-12 col-md-6 col-lg-offset-3">
-        <div class="alert alert-danger" *ngIf="errorAccured">
-            <p>{{ error }}</p>
-        </div>
+<!--        <div class="alert alert-danger" *ngIf="errorAccured">-->
+<!--            <p>{{ error }}</p>-->
+<!--        </div>-->
+        <app-alert [message]="error" *ngIf="error" (close)="handleError()"></app-alert>
         <form (ngSubmit)="onSubmit(authForm)" [formGroup]="authForm" *ngIf="!isLoading">
             <div class="form-group">
                 <label for="email"></label>

@@ -66,4 +66,8 @@ export class AuthComponent implements OnInit {
     switchMode() {
         this.isLogin = !this.isLogin;
     }
+
+    handleError() {
+      this.error = null;
+    }
 }
