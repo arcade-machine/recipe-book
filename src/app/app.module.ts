@@ -14,8 +14,8 @@ import { AuthComponent } from './auth/auth.component';
 import { MainHeaderComponent } from './header/header.component';
 import { RecipeBookComponent } from './recipe-book/recipe-book.component';
 import { RecipeBookModule } from './recipe-book/recipe-book.module';
-import { ShoppingListComponent } from './shopping-list/shopping-list.component';
-import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-edit.component';
+import { ShoppingListModule } from './shopping-list/shopping-list.module';
+
 import { LoaderComponent } from './shared/loader/loader.component';
 import { AuthInterceptorService } from './auth/auth-interceptor.service';
 import { AlertComponent } from './shared/alert/alert.component';
@@ -26,8 +26,6 @@ import { AlertComponent } from './shared/alert/alert.component';
     AuthComponent,
     MainHeaderComponent,
     RecipeBookComponent,
-    ShoppingListComponent,
-    ShoppingEditComponent,
     LoaderComponent,
     AlertComponent
   ],
@@ -36,7 +34,8 @@ import { AlertComponent } from './shared/alert/alert.component';
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
-    RecipeBookModule
+    RecipeBookModule,
+    ShoppingListModule
   ],
   providers: [ShoppingListService, RecipeService,
     // {
