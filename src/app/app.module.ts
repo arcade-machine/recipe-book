@@ -12,22 +12,17 @@ import { RecipeService } from './recipe-book/recipe.service';
 
 import { AuthComponent } from './auth/auth.component';
 import { MainHeaderComponent } from './header/header.component';
-import { RecipeBookComponent } from './recipe-book/recipe-book.component';
 import { RecipeBookModule } from './recipe-book/recipe-book.module';
 import { ShoppingListModule } from './shopping-list/shopping-list.module';
+import { SharedModule } from './shared/shared.module';
 
-import { LoaderComponent } from './shared/loader/loader.component';
 import { AuthInterceptorService } from './auth/auth-interceptor.service';
-import { AlertComponent } from './shared/alert/alert.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AuthComponent,
-    MainHeaderComponent,
-    RecipeBookComponent,
-    LoaderComponent,
-    AlertComponent
+    MainHeaderComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +30,8 @@ import { AlertComponent } from './shared/alert/alert.component';
     ReactiveFormsModule,
     HttpClientModule,
     RecipeBookModule,
-    ShoppingListModule
+    ShoppingListModule,
+    SharedModule
   ],
   providers: [ShoppingListService, RecipeService,
     // {
