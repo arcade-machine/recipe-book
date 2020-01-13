@@ -6,6 +6,9 @@ import { RecipeService } from '../recipe-book/recipe.service';
 import { AuthService } from '../auth/auth.service';
 import { exhaustMap, map, take, tap } from 'rxjs/operators';
 
+import { Store } from '@ngrx/store';
+import * as fromApp from '../store/app.reducer';
+
 @Injectable({
     providedIn: 'root'
 })
@@ -15,7 +18,8 @@ export class RequestsService {
     constructor(
         private http: HttpClient,
         private recipeService: RecipeService,
-        private authService: AuthService
+        private authService: AuthService,
+        private store: Store<fromApp.AppState>
 ) {}
 
     storeRecipes() {
@@ -26,8 +30,13 @@ export class RequestsService {
     }
 
     fetchRecipes() {
-        this.authService.user.pipe(
+      this.store.select('auth').pipe(
             take(1),
+            map(
+              authState => {
+                return authState.user;
+              }
+            ),
             exhaustMap(user => {
                 return this.http
                     .get<Recipe[]>(this.DATABASE_URL,

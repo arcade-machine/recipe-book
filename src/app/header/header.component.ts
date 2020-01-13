@@ -5,6 +5,9 @@ import { map, tap } from 'rxjs/operators';
 import { AuthService } from '../auth/auth.service';
 import { Subscription } from 'rxjs';
 
+import { Store } from '@ngrx/store';
+import * as fromApp from '../store/app.reducer';
+
 @Component({
     selector: 'app-header',
     templateUrl: './header.component.html',
@@ -18,11 +21,16 @@ export class MainHeaderComponent implements OnInit, OnDestroy {
     constructor(
         private requests: RequestsService,
         private recipeService: RecipeService,
-        private authService: AuthService
+        private authService: AuthService,
+        private store: Store<fromApp.AppState>
     ) {}
 
     ngOnInit(): void {
-        this._userSub = this.authService.user.subscribe(user => {
+        this._userSub = this.store.select('auth').pipe(
+          map(autState => {
+            return autState.user;
+          })
+        ).subscribe(user => {
             this.isAuth = !!user;
         });
     }
