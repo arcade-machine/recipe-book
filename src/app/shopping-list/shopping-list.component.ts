@@ -5,8 +5,8 @@ import { Store } from '@ngrx/store';
 import { Ingredient } from '../shared/ingredient.module';
 import { Observable, Subscription } from 'rxjs';
 
-import * as fromShoppingList from './store/shopping-list.reducer';
 import * as ShoppingListActions from '../shopping-list/store/shopping-list.actions';
+import * as fromApp from '../store/app.reducer';
 
 @Component({
   selector: 'app-shopping-list',
@@ -19,7 +19,7 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
   private _ingredientsChange: Subscription;
 
   constructor(
-    private store: Store<fromShoppingList.AppState>
+    private store: Store<fromApp.AppState>
   ) { }
 
   ngOnInit() {
