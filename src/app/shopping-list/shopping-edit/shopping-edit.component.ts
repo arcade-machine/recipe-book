@@ -3,7 +3,6 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
 import { Ingredient } from '../../shared/ingredient.module';
-import { ShoppingListService } from '../shopping-list.service';
 
 import { Store } from '@ngrx/store';
 import * as ShoppingListActions from '../store/shopping-list.actions';
@@ -22,7 +21,6 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
   editedItem: Ingredient;
 
   constructor(
-    private shoppingListService: ShoppingListService,
     private store: Store<fromShoppingList.AppState>
   ) { }
 
