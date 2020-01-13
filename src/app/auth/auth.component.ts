@@ -4,6 +4,10 @@ import { AuthService, AuthResponseData } from './auth.service';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 
+import { Store } from '@ngrx/store';
+import * as fromApp from '../store/app.reducer';
+import * as AuthActions from './store/auth.actions';
+
 @Component({
     selector: 'app-auth',
     templateUrl: './auth.component.html',
@@ -19,7 +23,8 @@ export class AuthComponent implements OnInit {
 
     constructor(
         private authService: AuthService,
-        private router: Router
+        private router: Router,
+        private store: Store<fromApp.AppState>
     ) {}
 
     ngOnInit(): void {
@@ -43,7 +48,8 @@ export class AuthComponent implements OnInit {
         let authObservable: Observable<AuthResponseData>;
 
         if (this.isLogin) {
-            authObservable = this.authService.login(email, password);
+          this.store.dispatch(new AuthActions.LoginStart({email: email, password: password}))
+            // authObservable = this.authService.login(email, password);
         } else {
             authObservable = this.authService.signUp(email, password);
         }
